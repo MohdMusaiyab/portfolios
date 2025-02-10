@@ -1,126 +1,87 @@
 "use client";
 import { motion } from "framer-motion";
-import {  Mail } from "lucide-react";
+import { FaGithub, FaLinkedinIn, FaTwitter } from "react-icons/fa";
+import { MdEmail } from "react-icons/md";
 
 const Footer = () => {
+  const socialLinks = [
+    { Icon: FaGithub, href: "https://github.com", label: "GitHub" },
+    { Icon: FaLinkedinIn, href: "https://linkedin.com", label: "LinkedIn" },
+    { Icon: FaTwitter, href: "https://twitter.com", label: "Twitter" },
+    { Icon: MdEmail, href: "mailto:example@email.com", label: "Email" }
+  ];
+
   return (
-    <footer className="bg-sky-900 text-white py-12">
-      <div className="container mx-auto px-4">
-        {/* Footer Content */}
-        <motion.div
-          className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8"
+    <footer className="bg-gradient-to-br from-sky-900 to-sky-950 text-white py-16">
+      <div className="container mx-auto px-6">
+        <motion.div 
+          className="max-w-4xl mx-auto"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
         >
-          {/* About Section */}
-          <div>
-            <h3 className="text-xl font-bold mb-4">About Us</h3>
-            <p className="text-sky-200">
-              Bringing you the latest news and stories from around the globe.
-              Stay informed with our trusted reporting.
-            </p>
-          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-12">
+            <div>
+              <h3 className="text-2xl font-bold mb-6">Let's Connect</h3>
+              <p className="text-sky-200 mb-6 max-w-md">
+                Open for collaborations and exciting opportunities. Feel free to reach out!
+              </p>
+              <div className="flex gap-5">
+                {socialLinks.map(({ Icon, href, label }) => (
+                  <motion.a
+                    key={label}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sky-200 hover:text-white transition-colors"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                    aria-label={label}
+                  >
+                    <Icon className="w-6 h-6" />
+                  </motion.a>
+                ))}
+              </div>
+            </div>
 
-          {/* Quick Links */}
-          <div>
-            <h3 className="text-xl font-bold mb-4">Quick Links</h3>
-            <ul className="space-y-2">
-              <li>
-                <a href="#" className="text-sky-200 hover:text-white">
-                  Home
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-sky-200 hover:text-white">
-                  News
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-sky-200 hover:text-white">
-                  About
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-sky-200 hover:text-white">
-                  Contact
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* Newsletter */}
-          <div>
-            <h3 className="text-xl font-bold mb-4">Newsletter</h3>
-            <p className="text-sky-200 mb-4">
-              Subscribe to our newsletter for the latest updates.
-            </p>
-            <form className="flex">
-              <input
-                type="email"
-                placeholder="Your email"
-                className="w-full px-4 py-2 rounded-l-lg bg-sky-800 text-white placeholder-sky-400 focus:outline-none"
-              />
-              <button
-                type="submit"
-                className="bg-sky-600 px-4 py-2 rounded-r-lg hover:bg-sky-700 transition-all"
-              >
-                Subscribe
-              </button>
-            </form>
-          </div>
-
-          {/* Social Media */}
-          <div>
-            <h3 className="text-xl font-bold mb-4">Follow Us</h3>
-            <div className="flex space-x-4">
-              <a
-                href="https://twitter.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sky-200 hover:text-white transition-all"
-              >
-                <Mail className="w-6 h-6" />
-              </a>
-              <a
-                href="https://facebook.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sky-200 hover:text-white transition-all"
-              >
-                <Mail className="w-6 h-6" />
-              </a>
-              <a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sky-200 hover:text-white transition-all"
-              >
-                <Mail className="w-6 h-6" />
-              </a>
-              <a
-                href="https://linkedin.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sky-200 hover:text-white transition-all"
-              >
-                <Mail className="w-6 h-6" />
-              </a>
+            <div>
+              <h3 className="text-2xl font-bold mb-6">Stay Updated</h3>
+              <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+                <div className="relative">
+                  <input
+                    type="email"
+                    placeholder="Your email address"
+                    className="w-full px-4 py-3 rounded-lg bg-sky-800/50 text-white placeholder:text-sky-300 focus:outline-none focus:ring-2 focus:ring-sky-400/50 transition-all"
+                  />
+                  <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="mt-3 w-full md:w-auto px-6 py-3 bg-sky-600 hover:bg-sky-500 rounded-lg font-medium transition-colors"
+                  >
+                    Subscribe
+                  </motion.button>
+                </div>
+              </form>
             </div>
           </div>
-        </motion.div>
 
-        {/* Divider */}
-        <div className="border-t border-sky-800 my-8"></div>
-
-        {/* Copyright */}
-        <motion.div
-          className="text-center text-sky-200"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-        >
-          <p>&copy; {new Date().getFullYear()} [Your Name]. All rights reserved.</p>
+          <div className="border-t border-sky-800/50 pt-8">
+            <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sky-300 text-sm">
+              <p>&copy; {new Date().getFullYear()} Syed Hussain Rizvi. All rights reserved.</p>
+              <nav className="flex gap-6">
+                {["Terms", "Privacy", "Contact"].map((item) => (
+                  <a
+                    key={item}
+                    href={`/${item.toLowerCase()}`}
+                    className="hover:text-white transition-colors"
+                  >
+                    {item}
+                  </a>
+                ))}
+              </nav>
+            </div>
+          </div>
         </motion.div>
       </div>
     </footer>

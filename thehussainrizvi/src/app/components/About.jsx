@@ -1,73 +1,105 @@
 "use client"
 import React from 'react';
-import { Award, Mic, Globe, Camera } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { IoMicSharp } from "react-icons/io5";
+import { FaAward, FaGlobeAmericas } from "react-icons/fa";
 
 const About = () => {
-  const professionalHighlights = [
+  const highlights = [
     {
-      icon: <Mic className="w-8 h-8 text-sky-700" />,
-      title: "Experienced Broadcast Journalist",
-      description: "Over 10 years of reporting experience across national and international news networks"
+      icon: <IoMicSharp />,
+      title: "Senior News Anchor",
+      description: "10+ years experience in broadcast journalism, delivering impactful stories"
     },
     {
-      icon: <Award className="w-8 h-8 text-sky-700" />,
-      title: "Multiple Industry Awards",
-      description: "Emmy Award winner for Outstanding Breaking News Coverage"
+      icon: <FaAward />,
+      title: "Award Winner",
+      description: "Multiple industry recognitions for excellence in journalism"
     },
     {
-      icon: <Globe className="w-8 h-8 text-sky-700" />,
-      title: "Global News Reporting",
-      description: "Extensive coverage of international political and humanitarian stories"
+      icon: <FaGlobeAmericas />,
+      title: "Global Coverage",
+      description: "Extensive experience reporting major international events"
     }
   ];
 
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-sky-50 to-white py-16">
-      <div className="container mx-auto px-4 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="max-w-4xl mx-auto text-center"
-        >
-          <h1 className="text-4xl md:text-5xl font-bold text-sky-900 mb-6">
-            Sarah Rodriguez
-          </h1>
-          <p className="text-xl text-sky-700 mb-12">
-            Award-Winning Broadcast Journalist | Storyteller | News Anchor
-          </p>
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.2 }
+    }
+  };
 
-          <div className="bg-white shadow-lg rounded-xl p-8 mb-12">
-            <p className="text-gray-700 leading-relaxed text-base md:text-lg">
-              With a passion for delivering truth and context, I've dedicated my career to bringing comprehensive, unbiased news to viewers. My approach combines rigorous journalistic integrity with compelling storytelling, bridging complex global narratives for audiences nationwide.
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: { duration: 0.6, ease: "easeOut" }
+    }
+  };
+
+  return (
+    <section className="min-h-screen bg-gradient-to-br from-sky-50 via-white to-sky-50 py-24">
+      <motion.div 
+        className="container mx-auto px-6"
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
+        <motion.div 
+          className="max-w-4xl mx-auto space-y-12"
+          variants={itemVariants}
+        >
+          <div className="text-center space-y-4">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-sky-950 tracking-tight">
+              Hussain Rizvi
+            </h1>
+            <p className="text-xl md:text-2xl text-sky-700 font-medium">
+              Senior News Anchor | Broadcast Journalist
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6">
-            {professionalHighlights.map((highlight, index) => (
+          <motion.div 
+            className="bg-white rounded-2xl shadow-xl p-8 md:p-10"
+            variants={itemVariants}
+          >
+            <p className="text-gray-700 text-lg md:text-xl leading-relaxed">
+              Dedicated to delivering accurate and compelling news coverage that matters. With a decade of experience in broadcast journalism, I specialize in breaking news and in-depth reporting that connects with viewers and makes complex stories accessible.
+            </p>
+          </motion.div>
+
+          <motion.div 
+            className="grid md:grid-cols-3 gap-8"
+            variants={containerVariants}
+          >
+            {highlights.map((item, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: index * 0.2, duration: 0.5 }}
-                className="bg-sky-50 p-6 rounded-xl text-center hover:shadow-md transition-shadow"
+                className="group relative bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300"
+                variants={itemVariants}
+                whileHover={{ y: -5 }}
               >
-                <div className="flex justify-center mb-4">
-                  {highlight.icon}
+                <div className="absolute inset-0 bg-gradient-to-br from-sky-100 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="relative">
+                  <div className="text-sky-600 text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
+                    {item.icon}
+                  </div>
+                  <h3 className="text-xl font-bold text-sky-950 mb-3">
+                    {item.title}
+                  </h3>
+                  <p className="text-gray-600">
+                    {item.description}
+                  </p>
                 </div>
-                <h3 className="font-bold text-sky-900 mb-2">
-                  {highlight.title}
-                </h3>
-                <p className="text-gray-600 text-sm">
-                  {highlight.description}
-                </p>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </motion.div>
-      </div>
-    </div>
+      </motion.div>
+    </section>
   );
 };
 
